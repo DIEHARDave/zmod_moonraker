@@ -93,12 +93,11 @@ class Channel(ExtendedEnum):
 def get_base_configuration(config: ConfigHelper) -> ConfigHelper:
     server = config.get_server()
     base_cfg = copy.deepcopy(BASE_CONFIG)
-    return config.read_supplemental_dict(base_cfg)
     kconn: KlippyConnection = server.lookup_component("klippy_connection")
     base_cfg["moonraker"]["type"] = str(AppType.detect())
-    base_cfg["klipper"]["path"] = str(kconn.path)
-    base_cfg["klipper"]["env"] = str(kconn.executable)
-    base_cfg["klipper"]["type"] = str(AppType.detect(kconn.path))
+    #base_cfg["klipper"]["path"] = str(kconn.path)
+    #base_cfg["klipper"]["env"] = str(kconn.executable)
+    #base_cfg["klipper"]["type"] = str(AppType.detect(kconn.path))
     default_channel = config.get("channel", None)
     # Check for configuration overrides
     for app_name in base_cfg.keys():
